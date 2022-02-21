@@ -41,31 +41,31 @@ start_price = 0
 while True:
     try:
         now = datetime.datetime.now()
-        start_time = get_start_time("KRW-XRP")
+        start_time = get_start_time("KRW-AXS")
         end_time = start_time + datetime.timedelta(days=1)
 
         if start_time < now < end_time - datetime.timedelta(seconds=10):
-            target_price = get_target_price("KRW-XRP", 0.5)
-            current_price = get_current_price("KRW-XRP")
+            target_price = get_target_price("KRW-AXS", 0.5)
+            current_price = get_current_price("KRW-AXS")
             if start_price *1.15 < current_price and start_price > 0:
-                btc = get_balance("XRP")
+                btc = get_balance("AXS")
                 if btc > 0.00008:
-                    upbit.sell_market_order("KRW-XRP", btc*0.9995)
+                    upbit.sell_market_order("KRW-AXS", btc*0.9995)
                     start_price = 0
             elif start_price * 0.9 > current_price and start_price > 0:
-                btc = get_balance("XRP")
+                btc = get_balance("AXS")
                 if btc > 0.00008:
-                    upbit.sell_market_order("KRW-XRP", btc*0.9995)
+                    upbit.sell_market_order("KRW-AXS", btc*0.9995)
                     start_price = 0
             if target_price < current_price and start_price == 0:
                 krw = get_balance("KRW")
                 if krw > 5000:
-                    upbit.buy_market_order("KRW-XRP", krw*0.9995)
-                    start_price = get_current_price("KRW-XRP")
+                    upbit.buy_market_order("KRW-AXS", krw*0.9995)
+                    start_price = get_current_price("KRW-AXS")
         else:
-            btc = get_balance("XRP")
+            btc = get_balance("AXS")
             if btc > 0.00008:
-                upbit.sell_market_order("KRW-XRP", btc*0.9995)
+                upbit.sell_market_order("KRW-AXS", btc*0.9995)
                 start_price = 0
         time.sleep(1)
     except Exception as e:
